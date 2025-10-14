@@ -1,7 +1,8 @@
+@echo off
+
 REM <!> This file should be downloaded from within Windows Setup (Shift+F10)
 REM <!> If you downloaded this file by going to my.LocalUser.app you're doing it wrong
 
-@echo off
 setlocal DisableDelayedExpansion
 
 curl -L -o C:\Windows\Panther\autounattend.xml https://au.localuser.app || exit /b 1

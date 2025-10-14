@@ -1,7 +1,10 @@
+REM <!> This file should be downloaded from within Windows Setup (Shift+F10)
+REM <!> If you downloaded this file by going to LocalUser.app you're doing it wrong
+
 @echo off
 setlocal DisableDelayedExpansion
 
-REM curl -L -o C:\Windows\Panther\autounattend.xml https://raw.githubusercontent.com/rcmaehl/LocalUser.app/refs/heads/main/autounattend.xml || exit /b 1
+curl -L -o C:\Windows\Panther\autounattend.xml https://raw.githubusercontent.com/rcmaehl/LocalUser.app/refs/heads/main/autounattend.xml || exit /b 1
 
 set "name=ACCOUNTNAMEPH"
 set "show=DISPLAYNAMEPH"

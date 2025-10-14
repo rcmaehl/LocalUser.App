@@ -10,6 +10,7 @@ curl -L -o C:\Windows\Panther\autounattend.xml https://au.localuser.app || exit 
 set "name=ACCOUNTNAMEPH"
 set "show=DISPLAYNAMEPH"
 set "pass=PASSWORDPH"
+echo.
 echo WARNING: Using the following characters will brick your install: /\[]:;^|=,+*?^<^>"
 echo WARNING: Using a username longer than 20 characters will brick your install
 echo.

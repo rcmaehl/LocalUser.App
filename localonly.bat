@@ -1,7 +1,8 @@
 @echo off
 
 REM <!> This file should be downloaded from within Windows Setup (Shift+F10)
-REM <!> If you downloaded this file by going to my.LocalUser.app you're doing it wrong
+REM <!> If you downloaded this file by going to my.LocalUser.app, you're doing it wrong
+REM <!> If you downloaded this file by going to releases on LocalUser.app, you're also doing it wrong
 
 setlocal DisableDelayedExpansion
 

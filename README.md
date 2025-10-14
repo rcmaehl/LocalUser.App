@@ -1,3 +1,11 @@
+[![Build Status](https://img.shields.io/github/actions/workflow/status/rcmaehl/WhyNotWin11/wnw11.yml?branch=main)](https://github.com/rcmaehl/WhyNotWin11/actions?query=workflow%3AWNW11)
+[![Download](https://img.shields.io/github/v/release/rcmaehl/LocalUser.App)](https://github.com/rcmaehl/LocalUser.App/releases/latest/)
+[![Download count)](https://img.shields.io/github/downloads/rcmaehl/LocalUser.App/total?label=Downloads)](https://github.com/rcmaehl/LocalUser.App/releases/latest/)
+[![Ko-fi](https://img.shields.io/badge/Support%20me%20on-Ko--fi-FF5E5B.svg?logo=ko-fi)](https://ko-fi.com/rcmaehl)
+[![PayPal](https://img.shields.io/badge/Donate%20on-PayPal-00457C.svg?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=YL5HFNEJAAMTL)
+[![Join the Discord chat](https://img.shields.io/badge/Discord-chat-7289da.svg?&logo=discord)](https://discord.gg/uBnBcBx)
+
+
 # LocalUser.App
 A Local User Account Script (with no unexpected extras)
 
@@ -10,3 +18,7 @@ After connecting to a network in the OOBE, press Shift + F10. Then, enter the fo
 ```batch
 curl -L my.localuser.app > lu.cmd && lu.cmd
 ```
+
+## What it does
+
+Downloads, Modifies, and Deploys a Generated [autounattended.xml Answer File](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/update-windows-settings-and-scripts-create-your-own-answer-file-sxs?view=windows-11) from [Scheegan's Generator](https://schneegans.de/windows/unattend-generator/) within the OOBE. This is the same method Rufus uses for it's Windows 10/11 tweaks.

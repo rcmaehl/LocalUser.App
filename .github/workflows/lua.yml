@@ -26,7 +26,7 @@ jobs:
         with:
           name: LUA
           path: |
-            localuser.bat
+            localonly.bat
             checksums.sha256
           if-no-files-found: error
       - name: Release

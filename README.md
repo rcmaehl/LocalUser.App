@@ -27,4 +27,4 @@ Downloads, Modifies, and Deploys a Generated [autounattended.xml Answer File](ht
 Language -> Keyboard -> Second Keyboard -> WiFi -> Name Device + Reboot -> Microsoft Account Sign In -> Windows Hello Setup -> Privacy Settings -> Restore from Microsoft Account -> Select Extra Apps -> Phone Link -> M365 Upsell -> Game Pass Upsell -> Desktop
 
 ### Local User Setup:
-Language -> Keyboard -> Second Keyboard -> WiFi -> LOCALUSER.APP HERE + Reboot -> Language -> Keybaord -> Second Keybaord -> Privacy Settings -> Desktop
+Language -> Keyboard -> Second Keyboard -> WiFi -> LOCALUSER.APP HERE + Reboot -> Language -> Keyboard -> Second Keyboard -> Privacy Settings -> Desktop

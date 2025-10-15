@@ -22,3 +22,9 @@ curl -L my.localuser.app > lu.cmd && lu.cmd
 ## What it does
 
 Downloads, Modifies, and Deploys a Generated [autounattended.xml Answer File](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/update-windows-settings-and-scripts-create-your-own-answer-file-sxs?view=windows-11) from [Scheegan's Generator](https://schneegans.de/windows/unattend-generator/) within the OOBE. This is the same method Rufus uses for it's Windows 10/11 tweaks.
+
+### Normal Setup:
+Language -> Keyboard -> Second Keyboard -> WiFi -> Name Device + Reboot -> Microsoft Account Sign In -> Windows Hello Setup -> Privacy Settings -> Restore from Microsoft Account -> Select Extra Apps -> Phone Link -> M365 Upsell -> Game Pass Upsell -> Desktop
+
+### Local User Setup:
+Language -> Keyboard -> Second Keyboard -> WiFi -> LOCALUSER.APP HERE + Reboot -> Language -> Keybaord -> Second Keybaord -> Privacy Settings -> Desktop

@@ -9,7 +9,7 @@
 # LocalUser.App
 A Local User Account Script (with no unexpected extras)
 
-<sup>Inspired by ChrisTitus' version</sup>
+<sup>Inspired by ChrisTitus</sup>
 
 ## Instructions
 

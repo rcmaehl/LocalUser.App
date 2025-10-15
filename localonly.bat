@@ -39,3 +39,8 @@ for /F "delims=" %%a in (C:\Windows\Panther\stage2.xml) DO (
 move /Y C:\Windows\Panther\stage3.xml C:\Windows\Panther\autounattend.xml >nul
 del /Q C:\Windows\Panther\stage1.xml
 del /Q C:\Windows\Panther\stage2.xml
+
+echo Press Any Key to Reboot and Apply Changes
+pause >nul
+
+%WINDIR%\System32\Sysprep\Sysprep.exe /oobe /unattend:C:\Windows\Panther\autounattend.xml /reboot

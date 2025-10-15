@@ -30,7 +30,7 @@ cURL-ing `https://my.localuser.app` downloads `https://github.com/rcmaehl/LocalU
 ## Setup Flow Comparisons
 
 ### Normal Setup:
-Language -> Keyboard -> Second Keyboard -> WiFi -> Name Device + Reboot -> Microsoft Account Sign In -> Windows Hello Setup -> Privacy Settings -> Restore from Microsoft Account -> Select Extra Apps -> Phone Link Setup -> M365 Upsell -> Game Pass Upsell -> Desktop
+Language -> Keyboard -> Second Keyboard -> WiFi -> Name Device + Reboot -> Microsoft Account Sign In -> Windows Hello Setup -> Privacy Settings -> Restore from Microsoft Account -> Select Extra Microsoft Store Apps -> Phone Link Setup -> M365 Upsell -> Game Pass Upsell -> Desktop
 
 ### Local User Setup (Ethernet):
 LOCALUSER.APP HERE + Reboot -> Language -> Keyboard -> Second Keyboard -> Privacy Settings -> Desktop

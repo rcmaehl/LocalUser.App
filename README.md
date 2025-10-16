@@ -19,8 +19,6 @@ After connecting to a network in the OOBE, press Shift + F10. Then, enter the fo
 curl -L my.localuser.app > lu.cmd && lu.cmd
 ```
 
-NOTE: You MUST fill in all requested values from the script. Blank values get replaced to prevent crashes!
-
 ## What it does
 
 Downloads, Modifies, and Deploys a Generated [autounattended.xml Answer File](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/update-windows-settings-and-scripts-create-your-own-answer-file-sxs?view=windows-11) from [Scheegan's Generator](https://schneegans.de/windows/unattend-generator/) within the OOBE. This is the same method Rufus uses for it's Windows 10/11 tweaks.

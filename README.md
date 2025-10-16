@@ -25,6 +25,15 @@ Downloads, Modifies, and Deploys a Generated [autounattended.xml Answer File](ht
 
 cURL-ing `https://my.localuser.app` downloads `https://github.com/rcmaehl/LocalUser.App/releases/latest/download/localonly.bat` via HTTP Redirect. That script then cURLs `https://au.localuser.app`, which downloads `https://raw.githubusercontent.com/rcmaehl/LocalUser.App/refs/heads/main/autounattend.xml` via HTTP Redirect (this may change to a release item in the future), followed by prompting users for the Local User Account details to be set to minimize security risks. After the account is created, the autoattended.xml files are purged to prevent credential leakage.
 
+## Why LocalUser.app instead of <Similar Project>?
+
+Currently, LocalUser.app is the only script that does ALL of the following:
+
+* Doesn't fully skip OOBE
+* Doesn't skip the Privacy Settings (due to not skipping OOBE)
+* Allows a Custom Username and Display Name
+* Purges Answer Files after setup to prevent Credential Leakage
+
 ## Setup Flow Comparisons
 
 ### Normal Setup:

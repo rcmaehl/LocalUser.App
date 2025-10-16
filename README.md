@@ -25,7 +25,7 @@ NOTE: You MUST fill in all requested values from the script. Blank values get re
 
 Downloads, Modifies, and Deploys a Generated [autounattended.xml Answer File](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/update-windows-settings-and-scripts-create-your-own-answer-file-sxs?view=windows-11) from [Scheegan's Generator](https://schneegans.de/windows/unattend-generator/) within the OOBE. This is the same method Rufus uses for it's Windows 10/11 tweaks.
 
-cURL-ing `https://my.localuser.app` downloads `https://github.com/rcmaehl/LocalUser.App/releases/latest/download/localonly.bat` via HTTP Redirect. That script then cURLs `https://au.localuser.app`, which downloads `https://raw.githubusercontent.com/rcmaehl/LocalUser.App/refs/heads/main/autounattend.xml` via HTTP Redirect (this may change to a release item in the future), followed by prompting users for the Local User Account details to be set to minimize security risks.
+cURL-ing `https://my.localuser.app` downloads `https://github.com/rcmaehl/LocalUser.App/releases/latest/download/localonly.bat` via HTTP Redirect. That script then cURLs `https://au.localuser.app`, which downloads `https://raw.githubusercontent.com/rcmaehl/LocalUser.App/refs/heads/main/autounattend.xml` via HTTP Redirect (this may change to a release item in the future), followed by prompting users for the Local User Account details to be set to minimize security risks. After the account is created, the autoattended.xml files are purged to prevent credential leakage.
 
 ## Setup Flow Comparisons
 

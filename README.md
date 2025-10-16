@@ -7,7 +7,7 @@
 
 
 # LocalUser.App
-A Local User Account Script (with no unexpected extras)
+A Local User Account Script (without unexpected extras)
 
 <sup>Inspired by ChrisTitus</sup>
 

@@ -28,7 +28,7 @@ if "%newshow%"=="" (
     echo No DisplayName was specified, defaulting to %newname%
     echo.
     set newshow=%newname%
-)   
+)
 :SetPass
 set /P newpass=Please Enter Password to Use: || set newpass=
 if "%newpass%"=="" (
@@ -39,29 +39,33 @@ if "%newpass%"=="" (
 )
 if "%newpass%"=="IAmAbsolutelySureIWantABlankPassword" set newpass=
 
+:ApplyUsername
 for /F "delims=" %%a in (C:\Windows\Panther\autounattend.xml) DO (
    set line=%%a
    setlocal EnableDelayedExpansion
    >> C:\Windows\Panther\stage1.xml echo(!line:%name%=%newname%!
    endlocal
 )
+:ApplyDisplayName
 for /F "delims=" %%a in (C:\Windows\Panther\stage1.xml) DO (
    set line=%%a
    setlocal EnableDelayedExpansion
    >> C:\Windows\Panther\stage2.xml echo(!line:%show%=%newshow%!
    endlocal
 )
+:ApplyPassword
 for /F "delims=" %%a in (C:\Windows\Panther\stage2.xml) DO (
    set line=%%a
    setlocal EnableDelayedExpansion
    >> C:\Windows\Panther\stage3.xml echo(!line:%pass%=%newpass%!
    endlocal
 )
+:FileCleanup
 move /Y C:\Windows\Panther\stage3.xml C:\Windows\Panther\autounattend.xml >nul
 del /Q C:\Windows\Panther\stage1.xml
 del /Q C:\Windows\Panther\stage2.xml
-
+:Finish
 echo.
-echo Press Any Key to Reboot and Apply Changes
+echo Press Any Key to Reboot and Apply Changes. Do not Reboot Manually.
 pause >nul
 %WINDIR%\System32\Sysprep\Sysprep.exe /oobe /unattend:C:\Windows\Panther\autounattend.xml /reboot

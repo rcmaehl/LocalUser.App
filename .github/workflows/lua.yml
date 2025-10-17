@@ -22,12 +22,14 @@ jobs:
       - name: Hash
         run: |
           sha256sum -b localonly.bat > checksums.sha256
+          sha256sum -b autounattended.xml > checksums.sha256
       - uses: actions/upload-artifact@v4
         with:
           name: LUA
           path: |
             localonly.bat
             checksums.sha256
+            autounattended.xml
           if-no-files-found: error
       - name: Release
         uses: softprops/action-gh-release@v1
@@ -36,5 +38,6 @@ jobs:
           files: |
             localonly.bat
             checksums.sha256
+            autounattended.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

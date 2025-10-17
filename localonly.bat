@@ -75,7 +75,7 @@ for /F "delims=" %%a in (C:\Windows\Panther\stage2.xml) DO (
 if "%newhost%"=="" (
     echo. >nul
 ) else (
-    wmic computersystem where name="%COMPUTERNAME%" call rename name="%newhost%"
+    wmic computersystem where name="%COMPUTERNAME%" call rename name="%newhost%" >nul
 )
 move /Y C:\Windows\Panther\stage3.xml C:\Windows\Panther\autounattend.xml >nul
 

@@ -10,10 +10,6 @@ curl -L -o C:\Windows\Panther\autounattend.xml https://au.localuser.app || exit 
 set "name=ACCOUNTNAMEPH"
 set "show=DISPLAYNAMEPH"
 set "pass=PASSWORDPH"
-set "host=HOSTNAMEPH"
-set "comment1=<!--START"
-set "comment2=END-->"
-set "blank="
 echo.
 echo WARNING: Using the following in your Username WILL brick your install: /\[]:;^|=,+*?^<^>"
 echo WARNING: Using a Username longer than 20 characters WILL brick your install
@@ -76,29 +72,12 @@ for /F "delims=" %%a in (C:\Windows\Panther\stage2.xml) DO (
 )
 
 :ApplyHostname
-if "%newhost%"=="" ( 
-    move /Y C:\Windows\Panther\stage3.xml C:\Temp\autounattend.xml >nul
+if "%newhost%"=="" (
+    echo. >nul
 ) else (
-    echo Setting Hostname...
-    for /F "delims=" %%a in (C:\Windows\Panther\stage3.xml) DO (
-        set "line=%%a"
-        set "line=!line:%comment1%=!"
-        echo(!line!>>C:\Windows\Panther\stage4.xml
-    )
-    for /F "delims=" %%a in (C:\Windows\Panther\stage4.xml) DO (
-        set "line=%%a"
-        set "line=!line:%comment2%=!"
-        echo(!line!>>C:\Windows\Panther\stage5.xml
-    )
-    for /F "delims=" %%a in (C:\Windows\Panther\stage5.xml) DO (
-        set line=%%a
-        >> C:\Windows\Panther\stage6.xml echo(!line:%host%=%newhost%!
-    )
-    move /Y C:\Windows\Panther\stage6.xml C:\Windows\Panther\autounattend.xml >nul
-    del /Q C:\Windows\Panther\stage5.xml
-    del /Q C:\Windows\Panther\stage4.xml
-    del /Q C:\Windows\Panther\stage3.xml
+    wmic computersystem where name="%COMPUTERNAME%" call rename name="%newhost%"
 )
+move /Y C:\Windows\Panther\stage3.xml C:\Windows\Panther\autounattend.xml >nul
 
 :FileCleanup
 del /Q C:\Windows\Panther\stage2.xml

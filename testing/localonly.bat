@@ -10,6 +10,7 @@ curl -L -o C:\Windows\Panther\autounattend.xml https://autest.localuser.app || e
 set "name=ACCOUNTNAMEPH"
 set "show=DISPLAYNAMEPH"
 set "pass=PASSWORDPH"
+set "host=HOSTNAMEPH"
 echo.
 echo WARNING: Using the following in your Username WILL brick your install: /\[]:;^|=,+*?^<^>"
 echo WARNING: Using a Username longer than 20 characters WILL brick your install
@@ -72,15 +73,16 @@ for /F "delims=" %%a in (C:\Windows\Panther\stage2.xml) DO (
 )
 
 :ApplyHostname
-if "%newhost%"=="" (
-    echo. >nul
-) else (
-    wmic computersystem where name="%COMPUTERNAME%" call rename name="%newhost%" >nul
+echo Setting Password...
+for /F "delims=" %%a in (C:\Windows\Panther\stage3.xml) DO (
+    set line=%%a
+    >> C:\Windows\Panther\stage4.xml echo(!line:%host%=%newhost%!
 )
-move /Y C:\Windows\Panther\stage3.xml C:\Windows\Panther\unattend.xml >nul
+move /Y C:\Windows\Panther\stage4.xml C:\Windows\Panther\unattend.xml >nul
 
 :FileCleanup
 del /Q C:\Windows\Panther\autounattend.xml
+del /Q C:\Windows\Panther\stage3.xml
 del /Q C:\Windows\Panther\stage2.xml
 del /Q C:\Windows\Panther\stage1.xml
 

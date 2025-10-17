@@ -77,9 +77,10 @@ if "%newhost%"=="" (
 ) else (
     wmic computersystem where name="%COMPUTERNAME%" call rename name="%newhost%" >nul
 )
-move /Y C:\Windows\Panther\stage3.xml C:\Windows\Panther\autounattend.xml >nul
+move /Y C:\Windows\Panther\stage3.xml C:\Windows\Panther\unattend.xml >nul
 
 :FileCleanup
+del /Q C:\Windows\Panther\autounattend.xml
 del /Q C:\Windows\Panther\stage2.xml
 del /Q C:\Windows\Panther\stage1.xml
 
@@ -87,4 +88,4 @@ del /Q C:\Windows\Panther\stage1.xml
 echo.
 echo Press Any Key to Reboot and Apply Changes. Do not Reboot Manually.
 pause >nul
-%WINDIR%\System32\Sysprep\Sysprep.exe /oobe /unattend:C:\Windows\Panther\autounattend.xml /reboot
+%WINDIR%\System32\Sysprep\Sysprep.exe /oobe /unattend:C:\Windows\Panther\unattend.xml /reboot

@@ -30,9 +30,10 @@ cURL-ing `https://my.localuser.app` downloads `https://github.com/rcmaehl/LocalU
 Currently, LocalUser.app is the only script that does ALL of the following:
 
 * Doesn't fully skip OOBE
-* Allows you to set the Hostname
 * Doesn't skip the Privacy Settings (due to not skipping OOBE)
-* Allows a Custom Username and Display Name
+* Allows you to set a Custom Hostname
+* Allows you to set a Custom Username
+* Allows you to set a Custom Display Name
 * Purges Answer File after setup to prevent Credential Leakage
 
 ## Setup Flow Comparisons

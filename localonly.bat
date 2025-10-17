@@ -5,11 +5,12 @@ REM <!> This file should be downloaded from within Windows Setup (Shift+F10)
 REM <!> If you downloaded this file by going to my.LocalUser.app, you're doing it wrong
 REM <!> If you downloaded this file by going to releases on LocalUser.app, you're also doing it wrong
 
-curl -L -o C:\Windows\Panther\autounattend.xml https://au.localuser.app || exit /b 1
+curl -L -o C:\Windows\Panther\autounattend.xml https://autest.localuser.app || exit /b 1
 
 set "name=ACCOUNTNAMEPH"
 set "show=DISPLAYNAMEPH"
 set "pass=PASSWORDPH"
+set "host=HOSTNAMEPH"
 echo.
 echo WARNING: Using the following in your Username WILL brick your install: /\[]:;^|=,+*?^<^>"
 echo WARNING: Using a Username longer than 20 characters WILL brick your install
@@ -72,14 +73,16 @@ for /F "delims=" %%a in (C:\Windows\Panther\stage2.xml) DO (
 )
 
 :ApplyHostname
-if "%newhost%"=="" (
-    echo. >nul
-) else (
-    wmic computersystem where name="%COMPUTERNAME%" call rename name="%newhost%" >nul
+echo Setting Password...
+for /F "delims=" %%a in (C:\Windows\Panther\stage3.xml) DO (
+    set line=%%a
+    >> C:\Windows\Panther\stage4.xml echo(!line:%host%=%newhost%!
 )
-move /Y C:\Windows\Panther\stage3.xml C:\Windows\Panther\autounattend.xml >nul
+move /Y C:\Windows\Panther\stage4.xml C:\Windows\Panther\unattend.xml >nul
 
 :FileCleanup
+del /Q C:\Windows\Panther\autounattend.xml
+del /Q C:\Windows\Panther\stage3.xml
 del /Q C:\Windows\Panther\stage2.xml
 del /Q C:\Windows\Panther\stage1.xml
 
@@ -87,4 +90,4 @@ del /Q C:\Windows\Panther\stage1.xml
 echo.
 echo Press Any Key to Reboot and Apply Changes. Do not Reboot Manually.
 pause >nul
-%WINDIR%\System32\Sysprep\Sysprep.exe /oobe /unattend:C:\Windows\Panther\autounattend.xml /reboot
+%WINDIR%\System32\Sysprep\Sysprep.exe /oobe /unattend:C:\Windows\Panther\unattend.xml /reboot

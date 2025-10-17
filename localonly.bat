@@ -5,7 +5,7 @@ REM <!> This file should be downloaded from within Windows Setup (Shift+F10)
 REM <!> If you downloaded this file by going to my.LocalUser.app, you're doing it wrong
 REM <!> If you downloaded this file by going to releases on LocalUser.app, you're also doing it wrong
 
-curl -L -o C:\Temp\autounattend.xml https://au.localuser.app || exit /b 1
+curl -L -o C:\Windows\Panther\autounattend.xml https://au.localuser.app || exit /b 1
 
 set "name=ACCOUNTNAMEPH"
 set "show=DISPLAYNAMEPH"
@@ -56,53 +56,53 @@ set /P newhost=Please Enter Hostname to Use (Blank = Default): || set newhost=
 
 :ApplyUsername
 echo Setting Username...
-for /F "delims=" %%a in (C:\Temp\test.xml) DO (
+for /F "delims=" %%a in (C:\Windows\Panther\autounattend.xml) DO (
     set line=%%a 
-    >> C:\Temp\test1.xml echo(!line:%name%=%newname%!
+    >> C:\Windows\Panther\stage1.xml echo(!line:%name%=%newname%!
 )
 
 :ApplyDisplayName
 echo Setting Display Name...
-for /F "delims=" %%a in (C:\Temp\test1.xml) DO (
+for /F "delims=" %%a in (C:\Windows\Panther\stage1.xml) DO (
     set line=%%a
-    >> C:\Temp\test2.xml echo(!line:%show%=%newshow%!
+    >> C:\Windows\Panther\stage2.xml echo(!line:%show%=%newshow%!
 )
 
 :ApplyPassword
 echo Setting Password...
-for /F "delims=" %%a in (C:\Temp\test2.xml) DO (
+for /F "delims=" %%a in (C:\Windows\Panther\stage2.xml) DO (
     set line=%%a
-    >> C:\Temp\test3.xml echo(!line:%pass%=%newpass%!
+    >> C:\Windows\Panther\stage3.xml echo(!line:%pass%=%newpass%!
 )
 
 :ApplyHostname
 if "%newhost%"=="" ( 
-    move /Y C:\Temp\test3.xml C:\Temp\autounattend.xml >nul
+    move /Y C:\Windows\Panther\stage3.xml C:\Temp\autounattend.xml >nul
 ) else (
     echo Setting Hostname...
-    for /F "delims=" %%a in (C:\temp\test3.xml) DO (
+    for /F "delims=" %%a in (C:\Windows\Panther\stage3.xml) DO (
         set "line=%%a"
         set "line=!line:%comment1%=!"
-        echo(!line!>>C:\temp\test4.xml 
+        echo(!line!>>C:\Windows\Panther\stage4.xml
     )
-    for /F "delims=" %%a in (C:\temp\test4.xml) DO (
+    for /F "delims=" %%a in (C:\Windows\Panther\stage4.xml) DO (
         set "line=%%a"
         set "line=!line:%comment2%=!"
-        echo(!line!>>C:\temp\test5.xml 
+        echo(!line!>>C:\Windows\Panther\stage5.xml
     )
-    for /F "delims=" %%a in (C:\temp\test5.xml) DO (
+    for /F "delims=" %%a in (C:\Windows\Panther\stage5.xml) DO (
         set line=%%a
-        >> C:\temp\test6.xml echo(!line:%host%=%newhost%!
+        >> C:\Windows\Panther\stage6.xml echo(!line:%host%=%newhost%!
     )
-    move /Y C:\Temp\test6.xml C:\Temp\autounattend.xml >nul
-    del /Q C:\Temp\test5.xml
-    del /Q C:\Temp\test4.xml
-    del /Q C:\Temp\test3.xml
+    move /Y C:\Windows\Panther\stage6.xml C:\Windows\Panther\autounattend.xml >nul
+    del /Q C:\Windows\Panther\stage5.xml
+    del /Q C:\Windows\Panther\stage4.xml
+    del /Q C:\Windows\Panther\stage3.xml
 )
 
 :FileCleanup
-del /Q C:\Temp\test2.xml
-del /Q C:\Temp\test1.xml
+del /Q C:\Windows\Panther\stage2.xml
+del /Q C:\Windows\Panther\stage1.xml
 
 :Finish
 echo.

@@ -40,71 +40,11 @@
 			<FirstLogonCommands>
 				<SynchronousCommand wcm:action="add">
 					<Order>1</Order>
-					<CommandLine>powershell.exe -WindowStyle Normal -NoProfile -Command "$xml = [xml]::new(); $xml.Load('C:\Windows\Panther\autounattend.xml'); $sb = [scriptblock]::Create( $xml.unattend.Extensions.ExtractScript ); Invoke-Command -ScriptBlock $sb -ArgumentList $xml;""</CommandLine>
-				</SynchronousCommand>
-				<SynchronousCommand wcm:action="add">
-					<Order>2</Order>
-					<CommandLine>powershell.exe -WindowStyle Normal -NoProfile -Command "Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\FirstLogon.ps1' -Raw | Invoke-Expression;"</CommandLine>
+					<CommandLine>powershell.exe -WindowStyle Normal -NoProfile -Command "Rename-Computer -NewName "HOSTNAMEPH" -Restart</CommandLine>
 				</SynchronousCommand>
 			</FirstLogonCommands>
 		</component>
 	</settings>
-	<Extensions xmlns="https://schneegans.de/windows/unattend-generator/">
-		<ExtractScript>
-param(
-    [xml] $Document
-);
-
-foreach( $file in $Document.unattend.Extensions.File ) {
-    $path = [System.Environment]::ExpandEnvironmentVariables( $file.GetAttribute( 'path' ) );
-    mkdir -Path( $path | Split-Path -Parent ) -ErrorAction 'SilentlyContinue';
-    $encoding = switch( [System.IO.Path]::GetExtension( $path ) ) {
-        { $_ -in '.ps1', '.xml' } { [System.Text.Encoding]::UTF8; }
-        { $_ -in '.reg', '.vbs', '.js' } { [System.Text.UnicodeEncoding]::new( $false, $true ); }
-        default { [System.Text.Encoding]::Default; }
-    };
-    $bytes = $encoding.GetPreamble() + $encoding.GetBytes( $file.InnerText.Trim() );
-    [System.IO.File]::WriteAllBytes( $path, $bytes );
-}
-		</ExtractScript>
-		<File path="C:\Windows\Setup\Scripts\FirstLogon.ps1">
-$scripts = @(
-	{
-		Set-ItemProperty -LiteralPath 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name 'AutoLogonCount' -Type 'DWord' -Force -Value 0;
-	};
-	{
-		Remove-Item -LiteralPath @(
-		  'C:\Windows\Panther\unattend.xml';
-		  'C:\Windows\Panther\unattend-original.xml';
-		  'C:\Windows\Panther\autounattend.xml';
-		  'C:\Windows\Setup\Scripts\Wifi.xml';
-		) -Force -ErrorAction 'SilentlyContinue' -Verbose;
-	};
-);
-
-&amp; {
-  [float] $complete = 0;
-  [float] $increment = 100 / $scripts.Count;
-  foreach( $script in $scripts ) {
-    Write-Progress -Activity 'Running scripts to finalize your Windows installation. Do not close this window.' -PercentComplete $complete;
-    '*** Will now execute command &#xAB;{0}&#xBB;.' -f $(
-      $str = $script.ToString().Trim() -replace '\s+', ' ';
-      $max = 100;
-      if( $str.Length -le $max ) {
-        $str;
-      } else {
-        $str.Substring( 0, $max - 1 ) + '&#x2026;';
-      }
-    );
-    $start = [datetime]::Now;
-    &amp; $script;
-    '*** Finished executing command after {0:0} ms.' -f [datetime]::Now.Subtract( $start ).TotalMilliseconds;
-    "`r`n" * 3;
-    $complete += $increment;
-  }
-} *&gt;&amp;1 &gt;&gt; "C:\Windows\Setup\Scripts\FirstLogon.log";
-		</File>
-	</Extensions>
 </unattend>
 
 

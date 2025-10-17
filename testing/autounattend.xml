@@ -40,7 +40,7 @@
 			<FirstLogonCommands>
 				<SynchronousCommand wcm:action="add">
 					<Order>1</Order>
-					<CommandLine>powershell.exe -WindowStyle Normal -NoProfile -Command "Rename-Computer -NewName "HOSTNAMEPH" -Restart</CommandLine>
+					<CommandLine>powershell.exe -WindowStyle Normal -NoProfile -Command "Remove-Item -Path C:\Windows\Panther\unattend.xml; Rename-Computer -NewName 'HOSTNAMEPH' -Restart"</CommandLine>
 				</SynchronousCommand>
 			</FirstLogonCommands>
 		</component>

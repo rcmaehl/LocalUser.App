@@ -22,7 +22,7 @@ jobs:
       - name: Hash
         run: |
           sha256sum -b localonly.bat > checksums.sha256
-          sha256sum -b autounattend.xml > checksums.sha256
+          sha256sum -b autounattend.xml >> checksums.sha256
       - uses: actions/upload-artifact@v4
         with:
           name: LUA

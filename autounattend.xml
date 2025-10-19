@@ -2,17 +2,6 @@
 <unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
 	<settings pass="offlineServicing"></settings>
 	<settings pass="windowsPE">
-		<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
-			<UserData>
-				<ProductKey>
-					<Key>00000-00000-00000-00000-00000</Key>
-					<WillShowUI>Always</WillShowUI>
-				</ProductKey>
-				<AcceptEula>true</AcceptEula>
-			</UserData>
-			<UseConfigurationSet>false</UseConfigurationSet>
-		</component>
-	</settings>
 	<settings pass="generalize"></settings>
 	<settings pass="specialize"></settings>
 	<settings pass="auditSystem"></settings>
@@ -46,6 +35,7 @@
 		</component>
 	</settings>
 </unattend>
+
 
 
 

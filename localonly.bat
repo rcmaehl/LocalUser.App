@@ -11,6 +11,7 @@ set "name=ACCOUNTNAMEPH"
 set "show=DISPLAYNAMEPH"
 set "pass=PASSWORDPH"
 set "host=HOSTNAMEPH"
+set "arch=arm64"
 echo.
 echo WARNING: Using the following in your Username WILL brick your install: /\[]:;^|=,+*?^<^>"
 echo WARNING: Using a Username longer than 20 characters WILL brick your install
@@ -51,9 +52,16 @@ echo WARNING: Using a Space in your Hostname WILL brick your install
 echo.
 set /P newhost=Please Enter Hostname to Use (Blank = Default): || set newhost=
 
+:SetArch
+echo Configuring for %PROCESSOR_ARCHITECTURE%...
+for /F "delims=" %%a in (C:\Windows\Panther\autounattend.xml) DO (
+    set line=%%a 
+    >> C:\Windows\Panther\stage0.xml echo(!line:%arch%=%PROCESSOR_ARCHITECTURE%!
+)
+
 :ApplyUsername
 echo Setting Username...
-for /F "delims=" %%a in (C:\Windows\Panther\autounattend.xml) DO (
+for /F "delims=" %%a in (C:\Windows\Panther\stage0.xml) DO (
     set line=%%a 
     >> C:\Windows\Panther\stage1.xml echo(!line:%name%=%newname%!
 )

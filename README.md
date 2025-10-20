@@ -13,11 +13,17 @@ A Local User Account Script (without unexpected extras)
 
 ## Instructions
 
+### Within OOBE
+
 After connecting to a network in the OOBE, press Shift + F10. Then, enter the following:
 
 ```batch
 curl -L my.localuser.app > lu.cmd && lu.cmd
 ```
+
+### Within Windows PE (pre-install)
+
+I am investigating the feasibility of this. Quick answer looks like no because the default WinPE of the installer may not have network drivers. If this turns out to be the case, we recommend Rufus, or just dropping the Scheegan's generated file directly in the root of your USB.
 
 ## What it does
 

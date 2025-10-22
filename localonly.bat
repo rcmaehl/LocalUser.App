@@ -5,12 +5,13 @@ REM <!> This file should be downloaded from within Windows Setup (Shift+F10)
 REM <!> If you downloaded this file by going to my.LocalUser.app, you're doing it wrong
 REM <!> If you downloaded this file by going to releases on LocalUser.app, you're also doing it wrong
 
-curl -L -o C:\Windows\Panther\autounattend.xml https://autest.localuser.app || exit /b 1
+curl -L -o C:\Windows\Panther\autounattend.xml https://au.localuser.app || exit /b 1
 
 set "name=ACCOUNTNAMEPH"
 set "show=DISPLAYNAMEPH"
 set "pass=PASSWORDPH"
 set "host=HOSTNAMEPH"
+set "arch=arm64"
 echo.
 echo WARNING: Using the following in your Username WILL brick your install: /\[]:;^|=,+*?^<^>"
 echo WARNING: Using a Username longer than 20 characters WILL brick your install
@@ -51,9 +52,16 @@ echo WARNING: Using a Space in your Hostname WILL brick your install
 echo.
 set /P newhost=Please Enter Hostname to Use (Blank = Default): || set newhost=
 
+:SetArch
+echo Configuring for %PROCESSOR_ARCHITECTURE%...
+for /F "delims=" %%a in (C:\Windows\Panther\autounattend.xml) DO (
+    set line=%%a 
+    >> C:\Windows\Panther\stage0.xml echo(!line:%arch%=%PROCESSOR_ARCHITECTURE%!
+)
+
 :ApplyUsername
 echo Setting Username...
-for /F "delims=" %%a in (C:\Windows\Panther\autounattend.xml) DO (
+for /F "delims=" %%a in (C:\Windows\Panther\stage0.xml) DO (
     set line=%%a 
     >> C:\Windows\Panther\stage1.xml echo(!line:%name%=%newname%!
 )

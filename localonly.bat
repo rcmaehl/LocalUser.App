@@ -42,7 +42,16 @@ if "%newpass%"=="" (
     echo.
     goto SetPass
 )
-if "%newpass%"=="IAmAbsolutelySureIWantABlankPassword" set newpass=
+if "%newpass%"=="IAmAbsolutelySureIWantABlankPassword" (
+    set newpass=
+    goto SetHost
+)
+
+:VerifyPass
+set /P newpass=Please Verify Password to Use: || set newpass2=
+if "%newpass%"=="%newpass2%" goto SetHost
+echo Passwords did not match
+goto SetPass
 
 :SetHost
 echo.
@@ -50,7 +59,7 @@ echo WARNING: Using the following in your Hostanme WILL brick your install: ,~:!
 echo WARNING: Using a Hostname longer than 15 characters WILL LIKELY brick your install
 echo WARNING: Using a Space in your Hostname WILL brick your install
 echo.
-set /P newhost=Please Enter Hostname to Use (Blank = Default): || set newhost=
+set /P newhost=Please Enter Hostname (Computer Name) to Use (Blank = Default): || set newhost=
 
 :SetArch
 echo Configuring for %PROCESSOR_ARCHITECTURE%...
@@ -81,7 +90,7 @@ for /F "delims=" %%a in (C:\Windows\Panther\stage2.xml) DO (
 )
 
 :ApplyHostname
-echo Setting Password...
+echo Setting Hostname...
 for /F "delims=" %%a in (C:\Windows\Panther\stage3.xml) DO (
     set line=%%a
     >> C:\Windows\Panther\stage4.xml echo(!line:%host%=%newhost%!
